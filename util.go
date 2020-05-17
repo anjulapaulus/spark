@@ -38,17 +38,12 @@ var logTypes = map[string]int{
 
 
 
-type logChecker struct {
-	*loggerConfig
-	log *log.Logger
-}
-
 //checkLoggableType function checks whether logging is enabled under current configurations
-func (l *logChecker) checkLoggableType (level string) bool {
+func (l *loggerConfig) checkLoggableType (level string) bool {
 	return logTypes[level] <= logTypes[l.logLevel]
 }
 
-func (l *logChecker) needColored (level string) string {
+func (l *loggerConfig) needColored (level string) string {
 	if l.colors {
 		return logColors[level]
 	}
@@ -66,7 +61,7 @@ func getUUIDFromContext(ctx context.Context) uuid.UUID {
 	return uid
 }
 
-func (l *logChecker) logLine (level string, ctx context.Context, message interface{}, prms ...interface{}) {
+func (l *loggerConfig) logLine (level string, ctx context.Context, message interface{}, prms ...interface{}) {
 
 	//check whether Log type exists
 	if !l.checkLoggableType(level) {

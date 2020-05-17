@@ -1,6 +1,9 @@
 package spark
 
-import "fmt"
+import (
+	"fmt"
+	log "log"
+)
 
 type loggerConfig struct {
 	prefix    string
@@ -8,7 +11,7 @@ type loggerConfig struct {
 	logLevel  string
 	filePath  bool
 	fileDepth int
-	util      logChecker
+	log       *log.Logger
 }
 
 func NewLogger(level string,colorEnabled,filePath bool) *loggerConfig{
@@ -26,13 +29,13 @@ type SimpleLoggerInterface interface {
 }
 
 func (l *loggerConfig) Print(v ...interface{}) {
-	l.util.logLine(INFO, nil, v, `INFO`)
+	l.logLine(INFO, nil, v, `INFO`)
 }
 
 func (l *loggerConfig) Printf(format string, v ...interface{}) {
-	l.util.logLine(INFO, nil, fmt.Sprintf(format, v...), `INFO`)
+	l.logLine(INFO, nil, fmt.Sprintf(format, v...), `INFO`)
 }
 
 func (l *loggerConfig) Println(v ...interface{}) {
-	l.util.logLine(INFO, nil, v, `INFO`)
+	l.logLine(INFO, nil, v, `INFO`)
 }
