@@ -2,6 +2,7 @@ package spark
 
 import (
 	"fmt"
+	"log"
 )
 
 type loggerConfig struct {
@@ -29,4 +30,14 @@ func (l *loggerConfig) Printf(format string, v ...interface{}) {
 
 func (l *loggerConfig) Println(v ...interface{}) {
 	l.logLine(INFO, nil, v, `INFO`)
+}
+
+func doBatch(datas []interface{}) bool {
+
+	for _, data := range datas {
+		if parsedValue, ok := data.(int); ok {
+			log.Println(fmt.Sprintf("[data]: %d", parsedValue))
+		}
+	}
+	return true
 }
