@@ -1,12 +1,12 @@
 # Spark
 A Logger library implementation in Golang.
 
-##Installation
+## Installation
 ````
 go get github.com/anjulapaulus/spark
 ````
 
-##Implementation
+## Implementation
 ````
 package main
 
@@ -19,5 +19,5 @@ func main(){
 }
 ````
 
-##Future Implementations
+## Future Implementations
 * Batch Processing for logging
