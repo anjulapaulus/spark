@@ -2,10 +2,9 @@ package spark
 
 import (
 	"context"
+	"github.com/google/uuid"
 	. "github.com/logrusorgru/aurora"
 	"log"
-	"github.com/google/uuid"
-	"runtime"
 )
 
 const (
@@ -86,27 +85,14 @@ func (l *loggerConfig) logLine (level string, ctx context.Context, message inter
 
 	params = append(params, logLevel, uid.String(), message)
 
-	if l.filePath {
-		_, file, line, ok := runtime.Caller(l.fileDepth)
-		if !ok {
-			file = `<Unknown>`
-			line = 1
-		}
-
-		format = "%s [%s] [%+v on %s:%d]"
-
-		params = append(params, file, line)
-
-	}
-
 	if len(prms) > 0 {
-		format = "%s [%s] [%+v on %s:%d] %+v"
+		format = "%s [%s] [%+v] %+v"
 		params = append(params, prms)
 	}
 
 	if level == FATAL {
-		l.log.Fatalf(format, params...)
+		log.Fatalf(format, params...)
 	}
 
-	l.log.Printf(format, params...)
+	log.Printf(format, params...)
 }

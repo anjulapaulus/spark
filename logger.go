@@ -2,16 +2,12 @@ package spark
 
 import (
 	"fmt"
-	log "log"
 )
 
 type loggerConfig struct {
-	prefix    string
 	colors    bool
 	logLevel  string
 	filePath  bool
-	fileDepth int
-	log       *log.Logger
 }
 
 func NewLogger(level string,colorEnabled,filePath bool) *loggerConfig{
@@ -22,11 +18,6 @@ func NewLogger(level string,colorEnabled,filePath bool) *loggerConfig{
 	}
 }
 
-type SimpleLoggerInterface interface {
-	Print(v ...interface{})
-	Printf(format string, v ...interface{})
-	Println(v ...interface{})
-}
 
 func (l *loggerConfig) Print(v ...interface{}) {
 	l.logLine(INFO, nil, v, `INFO`)

@@ -5,7 +5,6 @@ import (
 )
 
 
-
 func (l *loggerConfig) Fatal(message interface{}, params ...interface{}) {
 	l.logLine(FATAL, nil, message, params...)
 }

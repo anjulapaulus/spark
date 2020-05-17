@@ -1,2 +1,3 @@
-# spark
-A logger interface
+# Spark
+A Logger library implementation in Golang with batch processing.
+
